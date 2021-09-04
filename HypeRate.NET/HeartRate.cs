@@ -17,7 +17,8 @@ namespace HypeRate.NET
         private WebSocket v2WebSocket;
         private Timer v2Timer;
 
-        public int HR = 0;
+        public int HR { get; private set; } = 0;
+        public bool isSubscribed { get; private set; } = false;
 
         public HeartRate(string SessionID)
         {
@@ -49,10 +50,19 @@ namespace HypeRate.NET
             {
                 v2WebSocket = new WebSocket(v2URL);
                 v2WebSocket.OnMessage += V2WebSocket_OnMessage;
+                v2WebSocket.OnOpen += V2WebSocket_OnOpen;
+                v2WebSocket.OnClose += V2WebSocket_OnClose;
+                v2WebSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
                 v2WebSocket.Connect();
-                v2WebSocket.Send(sessionJson);
             }
         }
+
+        private void V2WebSocket_OnOpen(object sender, EventArgs e)
+        {
+            v2WebSocket.Send(sessionJson);
+            isSubscribed = true;
+        }
+        private void V2WebSocket_OnClose(object sender, CloseEventArgs e) => isSubscribed = false;
 
         private void StopWebsocket()
         {

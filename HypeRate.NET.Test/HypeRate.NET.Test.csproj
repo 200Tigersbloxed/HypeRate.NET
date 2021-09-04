@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HypeRate.NET">
-      <HintPath>..\HypeRate.NET\bin\Release\net48\HypeRate.NET.dll</HintPath>
+    <Reference Include="HypeRate.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ILMerge\output\HypeRate.NET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

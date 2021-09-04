@@ -49,7 +49,7 @@ exampleInt = hypeRate.HR;
 
 Here, `exampleInt` is an example variable that is an `int` and `hypeRate.HR` is the last recorded HeartRate. This can be cast to a string as well if you want to:
 
-```cs
+```
 exampleInt = hypeRate.HR;
 string heartRateText = exampleInt.ToString();
 ```
