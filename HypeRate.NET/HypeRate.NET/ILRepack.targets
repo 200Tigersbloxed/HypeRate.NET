@@ -1,0 +1,22 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="ILRepacker" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+
+    <ItemGroup>
+        <InputAssemblies Include="$(OutputPath)\$(AssemblyName).dll" />
+        <InputAssemblies Include="$(OutputPath)\websocket-sharp.dll" />
+      <InputAssemblies Include="$(OutputPath)\Newtonsoft.Json.dll" />
+        <LibraryPath Include="$(OutputPath)" />
+    </ItemGroup>
+
+    <ILRepack
+        Parallel="true"
+        Internalize="true"
+        InternalizeExclude="@(DoNotInternalizeAssemblies)"
+        InputAssemblies="@(InputAssemblies)"
+        LibraryPath="@(LibraryPath)"
+        TargetKind="Dll"
+        OutputFile="$(OutputPath)\$(AssemblyName).dll"
+    />
+
+    </Target>
+</Project>

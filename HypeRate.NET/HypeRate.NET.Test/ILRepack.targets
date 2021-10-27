@@ -1,0 +1,19 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="ILRepacker" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+
+    <ItemGroup>
+        <InputAssemblies Include="$(OutputPath)\$(AssemblyName).exe" />
+        <InputAssemblies Include="$(OutputPath)\HypeRate.NET.dll" />
+    </ItemGroup>
+
+    <ILRepack
+        Parallel="true"
+        Internalize="true"
+        InternalizeExclude="@(DoNotInternalizeAssemblies)"
+        InputAssemblies="@(InputAssemblies)"
+        TargetKind="Exe"
+        OutputFile="$(OutputPath)\$(AssemblyName).exe"
+    />
+
+    </Target>
+</Project>
